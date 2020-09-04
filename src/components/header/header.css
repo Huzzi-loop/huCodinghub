@@ -1,0 +1,20 @@
+.navtitle a{
+    text-decoration: none;
+    background-color:transparent;
+    color: white;
+}
+.navtitle a:hover{
+    text-decoration: underline;
+}
+
+.navcontact{
+    padding:0px 1.5rem
+}
+.navcontact a{
+    text-decoration: none;
+    color:white;
+}
+.navcontact a:hover{
+    text-decoration: none;
+    color:lightblue;
+}
