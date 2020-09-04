@@ -100,5 +100,13 @@ form {
     height: 85%;
     transition: transform 1.1s ease-in-out;
     transition-delay: .4s;
-    z-index: 101;
+    z-index: 150;
+}
+
+.divforms {
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-self:center;
+    flex-direction:column;
 }

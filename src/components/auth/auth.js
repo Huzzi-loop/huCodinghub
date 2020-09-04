@@ -5,32 +5,46 @@ import { useSpring, animated } from 'react-spring';
 function Auth(props) {
     
     const [state,setstate]=useState(false);
-    const SigninView = useRef(null);
+    const SignInView = useRef(null);
     const SignUpView = useRef(null);
 
     //animation for animating the bubble across the screen
-    const heroAnimation = useSpring({
+    const bubbleAnimation = useSpring({
         transform: state ? `translate3d(100%,0,0)` : `translate3d(0%,0,0)`,
         config:{duration:2000}
-      });
+    });
+
+    //animation for animating the Sign In Form
+    const signInFormAnimation = useSpring({
+        transform: state ? `translate3d(0%,0,0)` : `translate3d(10%,0,0)`,
+        config:{duration:1500}
+    });
+
+    //animation for animating the Sign Up Form
+    const signUpFormAnimation = useSpring({
+        transform: state ? `translate3d(-10%,0,0)` : `translate3d(0%,0,0)`,
+        config:{duration:1500}
+    });
 
     const toggle=()=>{
         setstate(!state)
 
         //code to move the screen along the bubble
         if(!state){
-            SigninView.current.scrollIntoView({ behavior: 'smooth' })
+            SignUpView.current.scrollIntoView({ behavior: 'smooth',block:'start' })
         }else{
-            SignUpView.current.scrollIntoView({ behavior: 'smooth' })
+            SignInView.current.scrollIntoView({ behavior: 'smooth',block:'start' })
         }
     }
 
     return (
         <div style={{overflow:'auto'}}>
-            <animated.div className="moving-ball" style={heroAnimation}>
+            <animated.div className="moving-ball" style={bubbleAnimation}>
             </animated.div>
             <div className="main-auth" style={{width:1.9*window.innerWidth,maxHeight:window.innerHeight,display:'flex',flexDirection:'row',flexWrap: 'nowrap'}}>
-                <div style={styles.divSignIn} ref={SignUpView}>
+                
+                <div style={styles.divSignIn} ref={SignInView}>
+
                     <div style={{flex:'1',overflow:'hidden',display:'flex',zIndex:100,flexDirection:'column'}}>
                         <div style={{flex:'1',display:'flex',flexDirection:'row'}}>
                             <div style={{flex:'1'}}>
@@ -45,7 +59,8 @@ function Auth(props) {
                             <img src={require('../../signin.svg')} className="image"  alt=""/>
                         </div>
                     </div>
-                    <div style={{flex:'1',display:'flex',justifyContent:'center',alignSelf:'center',flexDirection:'column'}}>
+
+                    <animated.div className="divforms" style={signInFormAnimation}>
                         <form>
                             <h2 className="title" style={{fontFamily:'poppins'}}>Sign in</h2>
                             <div className="input-field">
@@ -61,10 +76,12 @@ function Auth(props) {
                                     Forgot Password?
                                 </a>
                         </form>
-                    </div>
+                    </animated.div>
                 </div>
-                <div style={styles.divSignUp} ref={SigninView}>
-                    <div style={{flex:'1',display:'flex',justifyContent:'center',alignSelf:'center',flexDirection:'column'}}>
+                
+                <div style={styles.divSignUp} ref={SignUpView}>
+
+                    <animated.div className="divforms" style={signUpFormAnimation}>
                         <form>
                             <h2 className="title" style={{fontFamily:'poppins'}}>Sign Up</h2>
                             <div className="input-field">
@@ -89,7 +106,8 @@ function Auth(props) {
                             </div>
                                 <input type="submit" className="btn solid" value="Sign Up" />
                         </form>
-                    </div>
+                    </animated.div>
+
                     <div style={{flex:'1',overflow:'hidden',display:'flex',zIndex:100,flexDirection:'column'}}>
                         <div style={{flex:'1',display:'flex',flexDirection:'row'}}>
                             <div style={{flex:'1'}}>
