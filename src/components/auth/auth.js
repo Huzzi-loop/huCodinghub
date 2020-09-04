@@ -7,7 +7,8 @@ function Auth(props) {
     const [state,setstate]=useState(false);
     const SigninView = useRef(null);
     const SignUpView = useRef(null);
-    // const x =useSpring({ from: { x: -47 }, x: state ? 100 : -47, config: { duration: 1000 } })
+
+    //animation for animating the bubble across the screen
     const heroAnimation = useSpring({
         transform: state ? `translate3d(100%,0,0)` : `translate3d(0%,0,0)`,
         config:{duration:2000}
@@ -15,14 +16,13 @@ function Auth(props) {
 
     const toggle=()=>{
         setstate(!state)
+
+        //code to move the screen along the bubble
         if(!state){
             SigninView.current.scrollIntoView({ behavior: 'smooth' })
         }else{
             SignUpView.current.scrollIntoView({ behavior: 'smooth' })
         }
-        
-        // element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-        // console.log(x)
     }
 
     return (
@@ -110,6 +110,8 @@ function Auth(props) {
     );
 }
 
+
+//styles used in for parameters fetched in javascript like screen width and height
 const styles = {
     divSignIn:{
         display:'flex',
