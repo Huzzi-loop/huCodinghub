@@ -1,5 +1,7 @@
 import React from 'react';
-import './header.css'
+import './header.css';
+import {Link, Redirect} from 'react-router-dom';
+
 
 function Header(props) {
     return (
@@ -7,8 +9,8 @@ function Header(props) {
             <div style={styles.divTitle}>
                 <span className="navtitle">
                     <a href="/">
-                        Food Eazy
-                        <i className="fas fa-utensils" aria-hidden="true" style={{padding:'0 0 0 6px'}}></i>
+                        CodingHub
+                        <i className="fas fa-chalkboard" aria-hidden="true" style={{padding:'0 0 0 6px'}}></i>
                     </a>
                 </span>
             </div>
@@ -18,6 +20,13 @@ function Header(props) {
                         Home
                     </a>
                 </span>
+                <Link to={"/Newsletter"} >
+                    <span className="navcontact">
+                        <a href="/">
+                            Newsletter
+                        </a>
+                    </span>
+                </Link>
                 <span className="navcontact">
                     <a href="/">
                         Contact Us
